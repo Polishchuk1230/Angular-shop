@@ -1,0 +1,10 @@
+<div *ngIf="!isEmpty(); else elseBlock">
+    <p *ngFor="let product of getProducts()">
+        Name: {{product.name}}, price: {{product.price}}.
+    </p>
+    <p>Full price = {{getSumPrice()}}</p>
+</div>
+<ng-template #elseBlock>
+    <p>Your cart is empty.</p>
+</ng-template>
+
