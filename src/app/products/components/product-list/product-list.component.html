@@ -1,3 +1,4 @@
+<!-- Думаю, что проще сделать без параграфа, сразу применить ngFor к app-product и ему все передать для отображения -->
 <p *ngFor="let product of products">
     {{product.name}} <app-product [product]=product></app-product>
 </p>

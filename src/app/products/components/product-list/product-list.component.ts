@@ -8,9 +8,12 @@ import { ProductModel } from '../../models/product-model';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-  products: ProductModel[]
+  products!: ProductModel[];
 
-  constructor(productService: ProductService) {
-    this.products = productService.getProducts()
+  constructor(private productService: ProductService) {
+  }
+
+  ngOnInit(): void {
+    this.products = this.productService.getProducts();
   }
 }

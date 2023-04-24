@@ -8,8 +8,10 @@ import { CartService } from 'src/app/cart/services/cart.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  @Input() product: ProductModel | undefined = undefined;
+  @Input() product: ProductModel | undefined;
 
+  // Не надо внедрять тут сервис,
+  // реализуйте через аутпуты
   constructor(private cartService: CartService) {}
 
   onAddToCart() {
