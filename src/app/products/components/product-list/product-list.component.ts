@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ProductService } from '../../services/product.service';
+import { Component, OnInit } from '@angular/core';
 import { ProductModel } from '../../models/product-model';
+import { ProductService } from '../../services/product.service';
+import { CartService } from 'src/app/cart/services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,9 +9,16 @@ import { ProductModel } from '../../models/product-model';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-  products: ProductModel[]
 
-  constructor(productService: ProductService) {
-    this.products = productService.getProducts()
+  constructor(
+    public productService: ProductService,
+    private cartService: CartService
+  ) {}
+
+  onAddToCart(product: ProductModel) {
+    if (product.isAvailable) {
+      this.cartService.addProduct(product)
+      console.log("You have bought " + product.name + ". You have to pay " + product.price)
+    }
   }
 }

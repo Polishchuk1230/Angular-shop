@@ -1,3 +1,13 @@
+Changes on 02.05.23:
+* Created modules: CartModule, ProductModule, SharedModule
+* FirstComponent is a standalone component now
+* CartModel (model) was reworked
+* Binding between ProductListComponent and ProductComponents elements was improved.
+* Binding between CartListComponent and CartItemComponent elements was improved.
+* OnPush change detection strategy was settled for representative components: CartItemComponent, ProductComponent.
+* Created HighlightDirective in SharedModule.
+* Added functionality: increase/decrease quantity products in the cart; remove all products of some item from the cart.
+
 Changes on 17.04.23:
 * Added FirstComponent and used it in AppComponent
 * Added ProductModel, ProductService, ProductComponent, ProductListComponent and used it in AppComponent

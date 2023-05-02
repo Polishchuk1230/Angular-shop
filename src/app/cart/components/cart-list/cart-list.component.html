@@ -1,10 +1,16 @@
-<div *ngIf="!isEmpty(); else elseBlock">
-    <p *ngFor="let product of getProducts()">
-        Name: {{product.name}}, price: {{product.price}}.
+<div *ngIf="!isEmpty(); else emptyCartBlock">
+    <p *ngFor="let item of getItems()">
+        <app-cart-item highlight
+        [product]=item.product
+        [quantity]=item.quantity
+        
+        (quantityIncrease)="onQuantityIncrease($event)"
+        (quantityDecrease)="onQuantityDecrease($event)"
+        (deleteItem)="onDeleteItem($event)"
+        ></app-cart-item>
     </p>
-    <p>Full price = {{getSumPrice()}}</p>
+    <p>Total cost = {{getTotalCost()}}, total quantity = {{getTotalQuantity()}}</p>
 </div>
-<ng-template #elseBlock>
+<ng-template #emptyCartBlock>
     <p>Your cart is empty.</p>
 </ng-template>
-

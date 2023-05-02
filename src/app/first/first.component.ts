@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 
 import { Category } from './category.enum';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-first',
+  standalone: true,
   templateUrl: './first.component.html',
-  styleUrls: ['./first.component.css']
+  styleUrls: ['./first.component.css'],
+  imports: [SharedModule]
 })
 export class FirstComponent {
   name: string = "Test Component"

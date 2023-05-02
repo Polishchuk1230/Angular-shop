@@ -1,22 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductModel } from '../../models/product-model';
-import { CartService } from 'src/app/cart/services/cart.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductComponent {
-  @Input() product: ProductModel | undefined = undefined;
+  @Input()
+  product!: ProductModel;
 
-  constructor(private cartService: CartService) {}
+  @Output()
+  addToCart: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
 
   onAddToCart() {
-    if (!this.product) {
-      return;
-    }
-    this.cartService.addProduct(this.product)
-    console.log("You have bought " + this.product.name + ". You have to pay " + this.product.price)
+    this.addToCart.emit(this.product)
   }
 }

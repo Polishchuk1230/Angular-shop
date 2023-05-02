@@ -6,12 +6,13 @@ import { ProductModel } from '../models/product-model';
   providedIn: 'root'
 })
 export class ProductService {
-  constructor() { }
+  private products: ProductModel[] = [
+      new ProductModel("Cat", 22, true),
+      new ProductModel("Dog", 45, false),
+      new ProductModel("Mice", 11, true)
+    ]
 
-  getProducts() {
-    return new Array<ProductModel>(
-      new ProductModel("Cat", 22),
-      new ProductModel("Dog", 45),
-      new ProductModel("Mice", 11))
+  getProducts(): ProductModel[] {
+    return this.products
   }
 }
