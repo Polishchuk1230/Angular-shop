@@ -26,3 +26,4 @@ import { FirstComponent } from './first/first.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+// OK
