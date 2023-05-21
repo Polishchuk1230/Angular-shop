@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HighlightDirective } from './highlight.directive';
+import { FontResizeDirective } from './font-resize.directive';
 
 
 
@@ -9,10 +10,12 @@ import { HighlightDirective } from './highlight.directive';
     CommonModule
   ],
   declarations: [
-    HighlightDirective
+    HighlightDirective,
+    FontResizeDirective
   ],
   exports: [
-    HighlightDirective
+    HighlightDirective,
+    FontResizeDirective
   ]
 })
 export class SharedModule { }

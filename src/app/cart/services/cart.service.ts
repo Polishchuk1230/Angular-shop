@@ -6,7 +6,8 @@ import { ProductModel } from 'src/app/products/models/product-model';
   providedIn: 'root'
 })
 export class CartService {
-  cart: CartModel = { items: [] }
+  
+  private cart: CartModel = { items: [] }
 
   getProducts(): CartItem[] {
     return this.cart.items
@@ -29,35 +30,39 @@ export class CartService {
   }
 
   addProduct(product: ProductModel): void {
-    let index: number = this.cart.items.findIndex(e => e.product.isEqual(product))
-    if (index >= 0) {
-      this.cart.items[index] = {
-        product: this.cart.items[index].product,
-        quantity: this.cart.items[index].quantity + 1
-      }
+    const existingIndex = this.findIndexByProduct(product);
+  
+    if (existingIndex >= 0) {
+      this.cart.items = this.cart.items.map((item, index) =>
+        index === existingIndex ? { ...item, quantity: item.quantity + 1 } : item
+      );
     } else {
-      this.cart.items.push({product: product, quantity: 1})
+      this.cart.items = [...this.cart.items, { product, quantity: 1 }];
     }
   }
 
   /**
    * Removes a product-item from the cart or decreases its quantity by 1.
+   * 
    * @param product (required) a product to remove from the cart
-   * @param isForAll (optional) says whether we need to remove all equal products from the cart
+   * @param removeAllOccurrences (optional) says whether we need to remove all equal products from the cart
    * or just decrease its quantity by 1.
    */
-  removeProduct(product: ProductModel, isForAll?: boolean): void {
-    let index: number = this.cart.items.findIndex(i => i.product.isEqual(product))
-    let currentItem: CartItem = this.cart.items[index];
-    if (!currentItem) return;
+  removeProduct(product: ProductModel, removeAllOccurrences?: boolean): void {
+    const existingIndex = this.findIndexByProduct(product);
+    if (existingIndex === -1) return;
   
-    if (this.cart.items[index].quantity > 1 && !isForAll) {
-      this.cart.items[index] = {
-        product: currentItem.product,
-        quantity: currentItem.quantity - 1,
-      };
+    let currentProductQuantity: number = this.cart.items[existingIndex].quantity;
+    if (removeAllOccurrences || currentProductQuantity <= 1) {
+      this.cart.items = this.cart.items.filter(item => !item.product.isEqual(product));
     } else {
-      this.cart.items.splice(index, 1);
+      this.cart.items = this.cart.items.map((item, index) =>
+        index === existingIndex ? { ...item, quantity: item.quantity - 1 } : item
+      );
     }
+  }
+
+  private findIndexByProduct(product: ProductModel): number {
+    return this.cart.items.findIndex((item) => item.product.isEqual(product));
   }
 }

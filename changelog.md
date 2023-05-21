@@ -1,3 +1,13 @@
+Changes on 22.05.23:
+* Added FontResizeDirective (in use: @Input(), ElementRef + Renderer2, @HostListener('click'))
+* All the services were injected into FirstComponent
+* Added LocalStorageService. (The token was added via InjectionToken<Storage>)
+* Added genID - generator. (Registeret in DI via UseFactory, injected into GeneratorService via inject-method)
+* Added GeneratorService, GeneratorFactory, generatedString (in DI: useFactory + deps)
+* Added ConstantsService registered in DI via useValue
+* Added ConfigOptionsService, ConfigModel
+* CartService methods addProduct and removeProduct reworked to follow the immutable approach.
+
 Changes on 02.05.23:
 * Created modules: CartModule, ProductModule, SharedModule
 * FirstComponent is a standalone component now

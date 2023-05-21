@@ -1,20 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 
 import { Category } from './category.enum';
 import { SharedModule } from '../shared/shared.module';
+import { ConstantsService } from '../core/services/constants.service';
+import { GeneratorService } from '../core/services/generator.service';
+import { genID } from '../core/services/gen-id.generator';
+import { GenerateRandomNumber, generatedString } from '../core/services/generator.factory';
+import { LocalStorageService } from '../core/services/local-storage.service';
 
 @Component({
   selector: 'app-first',
   standalone: true,
   templateUrl: './first.component.html',
   styleUrls: ['./first.component.css'],
-  imports: [SharedModule]
+  imports: [SharedModule],
+  providers: [
+    GeneratorService,
+    { provide: genID, useFactory: genID },
+    { provide: generatedString, useFactory: GenerateRandomNumber(32), deps: [GeneratorService] },
+    { provide: LocalStorageService, useValue: localStorage },
+    { provide: ConstantsService, useValue: { App: "TaskManager", Ver: "1.0", API_URL: "http://..." } }
+  ]
 })
-export class FirstComponent {
-  name: string = "Test Component"
-  description: string = "Designed to test new features"
-  price: number = 100
+export class FirstComponent implements OnInit {
+  
   category: Category = Category.CATEGORY_ONE
-  isAvailable: boolean = true
-  stringArray: string[] = ["Hello", "World"]
+
+  generatedId1!: number;
+  generatedId2!: number;
+
+  constructor(
+    @Optional() @Inject(LocalStorageService) private localStorage: Storage,
+    @Optional() @Inject(ConstantsService) public constantsService: ConstantsService,
+    @Optional() @Inject(generatedString) public generatedString: string,
+    @Optional() @Inject(genID) private generateID: () => number
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.generatedId1 = this.generateID?.();
+    this.generatedId2 = this.generateID?.();
+
+    this.localStorage?.setItem("key", "Stored data");
+  }
+
+  public getStoredValue(): string {
+    return this.localStorage?.getItem("key") ?? "";
+  }
 }
