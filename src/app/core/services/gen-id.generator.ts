@@ -1,3 +1,4 @@
+// тут имелось ввиду function* genID
 export function genID(): () => number {
   let a = 1;
   let b = 2;
