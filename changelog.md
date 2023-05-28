@@ -1,3 +1,12 @@
+Changes on 29.05.23:
+* Added usage of predefined pipes: 'currency' and 'uppercase' in cart-item and cart-list templates.
+* Added usage of the 'async' predefined pipe in product-list.component.html (ProductService#getProducts returns Observable<ProductModel[]>)
+* Created OrderByPipe (registered in SharedModule, and for DI provided in ProductsModule)
+* Added interactive forms for sorting products at product-list.component.html template.
+
+Changes on 28.05.23:
+* fix: gen-id.generator.ts uses function* now.
+
 Changes on 22.05.23:
 * Added FontResizeDirective (in use: @Input(), ElementRef + Renderer2, @HostListener('click'))
 * All the services were injected into FirstComponent

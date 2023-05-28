@@ -1,4 +1,4 @@
-<span [textContent]=product.name></span>, <span [textContent]=product.price></span>.
+{{product.name | uppercase}}, {{product.price | currency}}.
 (Quantity = <span [textContent]=quantity></span>)
 
 <button (click)="onQuantityIncrease()">+</button>

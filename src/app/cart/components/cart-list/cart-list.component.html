@@ -9,7 +9,7 @@
         (deleteItem)="onDeleteItem($event)"
         ></app-cart-item>
     </p>
-    <p>Total cost = {{getTotalCost()}}, total quantity = {{getTotalQuantity()}}</p>
+    <p>Total cost = {{getTotalCost() | currency}}, total quantity = {{getTotalQuantity()}}</p>
 </div>
 <ng-template #emptyCartBlock>
     <p>Your cart is empty.</p>

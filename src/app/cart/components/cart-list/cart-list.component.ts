@@ -24,10 +24,10 @@ export class CartListComponent {
   getItems(): {product: ProductModel, quantity: number}[] {
     return this.cartService.getProducts()
   }
-  getTotalCost(): Number {
+  getTotalCost(): number {
     return this.cartService.getTotalCost()
   }
-  getTotalQuantity(): Number {
+  getTotalQuantity(): number {
     return this.cartService.getTotalQuantity()
   }
   isEmpty(): boolean {

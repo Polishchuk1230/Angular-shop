@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HighlightDirective } from './highlight.directive';
 import { FontResizeDirective } from './font-resize.directive';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,11 +13,15 @@ import { FontResizeDirective } from './font-resize.directive';
   ],
   declarations: [
     HighlightDirective,
-    FontResizeDirective
+    FontResizeDirective,
+    OrderByPipe
   ],
   exports: [
+    FormsModule,
+
     HighlightDirective,
-    FontResizeDirective
+    FontResizeDirective,
+    OrderByPipe
   ]
 })
 export class SharedModule { }

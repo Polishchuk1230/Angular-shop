@@ -1,3 +1,11 @@
-<p *ngFor="let product of productService.getProducts()">
+<label for="sortOrder">Sort Order:</label>
+<input id="sortOrder" type="checkbox" [(ngModel)]="isAsc">
+
+<label for="sortBy">Sort By:</label>
+<select id="sortBy" [(ngModel)]="selectedSortParam" (change)="onSortParamChange($event)">
+    <option *ngFor="let sortParam of orderByPipe.getCriteriaToSort()" value={{sortParam}}>{{sortParam}}</option>
+</select>
+
+<p *ngFor="let product of productService.getProducts() | async | orderBy : [selectedSortParam] : isAsc">
     <app-product [product]=product (addToCart)="onAddToCart($event)"></app-product>
 </p>
