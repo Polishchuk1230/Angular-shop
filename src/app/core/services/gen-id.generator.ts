@@ -1,10 +1,10 @@
-export function genID(): () => number {
-  let a = 1;
-  let b = 2;
+export function* genID() {
+  
+    let id = 1;
+    let nextId = 1;
 
-  return function (): number {
-    const result = a;
-    [a, b] = [b, a + b];
-    return result;
-  };
+    while (true) {
+      yield [id, nextId] = [nextId, id + nextId];
+    }
+
 }

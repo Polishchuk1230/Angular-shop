@@ -26,20 +26,20 @@ export class FirstComponent implements OnInit {
   
   category: Category = Category.CATEGORY_ONE
 
-  generatedId1!: number;
-  generatedId2!: number;
+  generatedId1!: any;
+  generatedId2!: any;
 
   constructor(
     @Optional() @Inject(LocalStorageService) private localStorage: Storage,
     @Optional() @Inject(ConstantsService) public constantsService: ConstantsService,
     @Optional() @Inject(generatedString) public generatedString: string,
-    @Optional() @Inject(genID) private generateID: () => number
+    @Optional() @Inject(genID) private generateID: Generator
   ) {
   }
 
   ngOnInit(): void {
-    this.generatedId1 = this.generateID?.();
-    this.generatedId2 = this.generateID?.();
+    this.generatedId1 = this.generateID?.next().value[0];
+    this.generatedId2 = this.generateID?.next().value[0];
 
     this.localStorage?.setItem("key", "Stored data");
   }
