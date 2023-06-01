@@ -27,8 +27,8 @@ export class ProductListComponent {
     }
   }
 
-  onSortParamChange(event: any) {
-    this.selectedSortParam = event.target.value;
+  onSortParamChange({ target }: Event) {
+    this.selectedSortParam = (target as HTMLSelectElement).value;
   }
 
 }
